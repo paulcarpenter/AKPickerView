@@ -257,17 +257,19 @@
 		case AKPickerViewStyleFlat: {
 			CGPoint center = [self convertPoint:self.collectionView.center toView:self.collectionView];
 			NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:center];
-			[self selectItem:indexPath.item animated:YES];
+			if (indexPath) [self selectItem:indexPath.item animated:YES];
 			break;
 		}
 		case AKPickerViewStyle3D: {
 			if ([self.dataSource numberOfItemsInPickerView:self]) {
 				for (NSUInteger i = 0; i < [self collectionView:self.collectionView numberOfItemsInSection:0]; i++) {
 					NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
-					AKCollectionViewCell *cell = (AKCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
-					if ([self offsetForItem:i] + cell.bounds.size.width / 2 > self.collectionView.contentOffset.x) {
-						[self selectItem:i animated:YES];
-						break;
+					if (indexPath) {
+						AKCollectionViewCell *cell = (AKCollectionViewCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
+						if ([self offsetForItem:i] + cell.bounds.size.width / 2 > self.collectionView.contentOffset.x) {
+							[self selectItem:i animated:YES];
+							break;
+						}
 					}
 				}
 			}
