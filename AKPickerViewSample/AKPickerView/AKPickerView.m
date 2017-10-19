@@ -21,6 +21,8 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIFont *font;
 @property (nonatomic, strong) UIFont *highlightedFont;
+@property (nonatomic, strong) UIColor *defaultBackgroundColor;
+@property (nonatomic, strong) UIColor *highlightedBackgroundColor;
 @end
 
 @interface AKCollectionViewLayout : UICollectionViewFlowLayout
@@ -48,7 +50,12 @@
 	self.font = self.font ?: [UIFont fontWithName:@"HelveticaNeue-Light" size:20];
 	self.highlightedFont = self.highlightedFont ?: [UIFont fontWithName:@"HelveticaNeue" size:20];
 	self.textColor = self.textColor ?: [UIColor darkGrayColor];
+	self.highlightedBackgroundColor = self.highlightedBackgroundColor ?: [UIColor whiteColor];
+	self.backgroundColor = self.backgroundColor ?: [UIColor whiteColor];
+	self.defaultbackgroundColor = self.defaultbackgroundColor ?: [UIColor whiteColor];
+	self.highlightedBackgroundColor = self.highlightedBackgroundColor  ?: [UIColor whiteColor];
 	self.highlightedTextColor = self.highlightedTextColor ?: [UIColor blackColor];
+
 	self.pickerViewStyle = self.pickerViewStyle ?: AKPickerViewStyle3D;
 	self.maskDisabled = self.maskDisabled;
 
@@ -304,6 +311,8 @@
 		cell.label.font = self.font;
 		cell.font = self.font;
 		cell.highlightedFont = self.highlightedFont;
+		cell.highlightedBackgroundColor = self.highlightedBackgroundColor;
+		cell.defaultBackgroundColor = self.defaultbackgroundColor;
 		cell.label.bounds = (CGRect){CGPointZero, [self sizeForString:title]};
 		if ([self.delegate respondsToSelector:@selector(pickerView:marginForItem:)]) {
 			CGSize margin = [self.delegate pickerView:self marginForItem:indexPath.item];
@@ -456,6 +465,7 @@
 	[self.label.layer addAnimation:transition forKey:nil];
 
 	self.label.font = self.selected ? self.highlightedFont : self.font;
+	self.label.backgroundColor = self.selected ? self.highlightedBackgroundColor : self.defaultBackgroundColor;
 }
 
 @end

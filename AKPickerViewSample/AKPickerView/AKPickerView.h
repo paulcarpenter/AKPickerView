@@ -38,6 +38,8 @@ typedef NS_ENUM(NSInteger, AKPickerViewStyle) {
 @property (nonatomic, strong) UIFont *highlightedFont;
 @property (nonatomic, strong) UIColor *textColor;
 @property (nonatomic, strong) UIColor *highlightedTextColor;
+@property (nonatomic, strong) UIColor *defaultbackgroundColor;
+@property (nonatomic, strong) UIColor *highlightedBackgroundColor;
 @property (nonatomic, assign) CGFloat interitemSpacing;
 @property (nonatomic, assign) CGFloat fisheyeFactor; // 0...1; slight value recommended such as 0.0001
 @property (nonatomic, assign, getter=isMaskDisabled) BOOL maskDisabled;
